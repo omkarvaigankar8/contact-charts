@@ -10,7 +10,7 @@ const ContactPage = () => {
     const dispatch = useAppDispatch();
     const [editingContactId, setEditingContactId] = useState<number | null>(null);
     const [createContact, setCreateContact] = useState<boolean>(false);
-
+    console.log("aaa", allContacts)
     const toggleEdit = (contactId: number) => {
         setEditingContactId(contactId === editingContactId ? null : contactId);
     };
@@ -42,6 +42,12 @@ const ContactPage = () => {
                         )}
                     </div>
                 ))}
+                {!createContact && allContacts.length === 0 && (
+                    <div className=' flex flex-col w-max p-4 md:p-2 border-2 justify-center items-center text-center border-black shadow-2xl'>
+                        <h2 className=' md:text-3xl text-xl font-bold'>No Contact Found</h2>
+                        <p className='md:text-2xl text-sm font-semibold'>Please add Contact form Create Contact Button</p>
+                    </div>
+                )}
                 {createContact && (
                     <ContactForm contactEdit={{ id: 0, firstName: '', lastName: '', status: 'Active' }} setCreateContact={setCreateContact} createContact={createContact} setEditingContactId={setEditingContactId} />
                 )}

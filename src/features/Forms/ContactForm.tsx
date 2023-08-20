@@ -1,20 +1,17 @@
 import * as React from 'react';
 import {
     Formik,
-    FormikHelpers,
-    FormikProps,
     Form,
     Field,
-    FieldProps,
 } from 'formik';
 import { addContact, editContact } from 'store/features/contact/contactSlice';
-import { useAppDispatch, useAppSelector } from 'store/app/hooks';
+import { useAppDispatch } from 'store/app/hooks';
 import { Contact } from 'features/Interfaces';
 import { Button } from '@material-tailwind/react';
 
 type ContactFormProps = {
     contactEdit: Contact;
-    setCreateContact: React.Dispatch<React.SetStateAction<boolean>> // Define the prop for edited contact
+    setCreateContact: React.Dispatch<React.SetStateAction<boolean>>
     createContact: Boolean,
     setEditingContactId: React.Dispatch<React.SetStateAction<number | null>>
 };
@@ -41,7 +38,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ contactEdit, setCreate
             initialValues={initialValues}
             onSubmit={(values, actions) => {
                 if (!values.id) {
-                    values.id = Math.random(); // You might want to generate a proper unique ID
+                    values.id = Math.random();
                 }
                 actionDispatch(values);
 
@@ -49,30 +46,19 @@ export const ContactForm: React.FC<ContactFormProps> = ({ contactEdit, setCreate
             }}
         >
             <Form className='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
-                {/* <label htmlFor="firstName">First Name</label>
-                <Field id="firstName" name="firstName" placeholder="First Name" /> */}
+
                 <div className="sm:col-span-3">
                     <label htmlFor="firstName" className=" block text-sm font-medium leading-6 text-gray-900">First Name</label>
                     <div className="mt-2">
                         <Field type="text" name="firstName" id="firstName" className="pl-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </div>
                 </div>
-                {/* <label htmlFor="lastName">Last Name</label>
-                <Field id="lastName" name="lastName" placeholder="Last Name" /> */}
                 <div className="sm:col-span-3">
                     <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">Last Name</label>
                     <div className="mt-2">
                         <Field type="text" name="lastName" id="lastName" className="pl-1 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                     </div>
                 </div>
-                {/* <label>
-                    <Field type="radio" name="status" value="Active" checked={initialValues.status} />
-                    One
-                </label>
-                <label>
-                    <Field type="radio" name="status" value="UnActive" />
-                    Two
-                </label> */}
                 <div className="flex flex-row justify-between items-center w-full gap-7">
                     <div className="flex flex-col w-40 gap-2">
                         <div className="flex items-center gap-x-3">
@@ -84,10 +70,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ contactEdit, setCreate
                             <label htmlFor="status" className="block text-sm font-medium leading-6 text-gray-900">UnActive</label>
                         </div>
                     </div>
-                    {/* <div className=""> */}
                     <Button type="submit" className=' w-22'>Save</Button>
                 </div>
-                {/* </div> */}
             </Form>
         </Formik>
     );

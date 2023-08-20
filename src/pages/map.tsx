@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { divIcon, LatLngTuple } from "leaflet";
 import L from "leaflet";
@@ -20,7 +20,7 @@ const createClusterCustomIcon = function (cluster: any) {
     });
 };
 export default function Map({ countries, isLoading }: any) {
-    const [countryData, setCountryData] = useState(countries.map((country: any) => {
+    const countryData = countries.map((country: any) => {
         return (
             {
                 country: country.country,
@@ -31,7 +31,7 @@ export default function Map({ countries, isLoading }: any) {
                 long: country.countryInfo.long
             }
         )
-    }));
+    });
     const markers2 = countryData.map((country: any) => {
         return {
             geocode: [country.lat, country.long] as LatLngTuple,
