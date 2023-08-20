@@ -18,7 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src", // Set the base URL to your source directory
+    // "paths": {
+    //   "@features/*": ["features/*"] // Define the paths mapping
+    // }
+    "types": ["@types/react-query","@types/react", "@types/react-dom","react-router-dom", "@types/react-leaflet","@types/react-redux"]
   },
   "include": [
     "src"

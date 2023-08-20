@@ -1,25 +1,37 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Contact from 'pages/contact';
+import Charts from 'pages/charts';
+import MapView from 'pages/map';
+import "leaflet/dist/leaflet.css";
+import { useQuery } from 'react-query';
+import Layout from 'features/UI/Layout';
+import covidCasesService from 'services/covidCases.service';
 
 function App() {
+  const { data: Countries, isLoading } = useQuery(
+    ['country'],
+    () => covidCasesService.getCountry(`countries`),
+    {
+      onError: (error) => {
+
+      },
+    }
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <div className="relative">
+          <Routes>
+            <Route path="/" element={<Contact />} />
+            <Route path="/charts" element={<Charts />} />
+            <Route path="/map" element={<MapView countries={Countries} isLoading={isLoading} />} />
+          </Routes>
+        </div>
+      </Layout>
+    </BrowserRouter>
   );
 }
 
